@@ -24,6 +24,14 @@ class RsocketRpcTest {
     val responseFlux = RsocketRpcTest.client.streamingRequestAndResponse()
     responseFlux.subscribe((simpleResponse) => {logger.info(s"response = ${simpleResponse}")})
   }
+
+  @Test
+  @DisplayName("testRequestStream")
+  @RepeatedTest(10)
+  def testRequestStream() = {
+    val responseFlux = RsocketRpcTest.client.requestStream()
+    responseFlux.subscribe((simpleResponse) => {logger.info(s"response = ${simpleResponse}")})
+  }
 }
 
 object RsocketRpcTest {
