@@ -1,5 +1,6 @@
 package org.excavator.rsocket.rpc.test
 
+import org.excavator.rsocket.rpc.{RsocketRpcClientApplication, RsocketRpcServerApplication}
 import org.junit.jupiter.api._
 import org.slf4j.LoggerFactory
 
@@ -7,9 +8,13 @@ class RsocketRpcTest {
   val logger = LoggerFactory.getLogger(classOf[RsocketRpcTest])
 
   @Test
-  @DisplayName("testProductByOK")
+  @DisplayName("testRsocketRpc")
   @RepeatedTest(1000)
-  def testProductByOK() = {
+  def testRsocketRpc() = {
+    val server = new RsocketRpcServerApplication
+    server.start(53000)
+    val client = new RsocketRpcClientApplication()
+    client.connect(53000)
   }
 }
 
