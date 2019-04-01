@@ -8,27 +8,32 @@ option java_package = "org.excavator.grpc.rsocket.rpc";
 option java_outer_classname = "SimpleServiceProto";
 option java_multiple_files = true;
 
-service SimpleService{
+service SimpleService {
     // Request / Response
-    rpc RequestReply (SimpleRequest) returns (SimpleResponse){}
+    rpc RequestReply (SimpleRequest) returns (SimpleResponse) {
+    }
 
     // Fireand Forget
-    rpc FireAndForget (SimpleRequest)returns (google.protobuf.Empty){}
+    rpc FireAndForget (SimpleRequest) returns (google.protobuf.Empty) {
+    }
 
     // Single Request /Streaming Response
-    rpc RequestStream(SimpleRequest) returns (stream SimpleResponse){}
+    rpc RequestStream (SimpleRequest) returns (stream SimpleResponse) {
+    }
 
     // Streaming Request / Single Response
-    rpc StreamingRequestSingleResponse (stream SimpleRequest) returns (SimpleResponse){}
+    rpc StreamingRequestSingleResponse (stream SimpleRequest) returns (SimpleResponse) {
+    }
 
     // Streaming Request / Streaming Response
-    rpc StreamingRequestAndResponse (stream SimpleRequest) returns (stream SimpleResponse){}
+    rpc StreamingRequestAndResponse (stream SimpleRequest) returns (stream SimpleResponse) {
+    }
 }
 
-message SimpleRequest{
+message SimpleRequest {
     string requestMessage = 1;
 }
 
-message SimpleResponse{
+message SimpleResponse {
     string responseMessage = 1;
 }

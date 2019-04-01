@@ -1,7 +1,5 @@
 package org.excavator.rsocket.rpc
 
-import java.time.Duration
-
 import com.google.protobuf.Empty
 import io.netty.buffer.ByteBuf
 import org.excavator.grpc.rsocket.rpc.{SimpleRequest, SimpleResponse, SimpleService}
