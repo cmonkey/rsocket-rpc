@@ -18,6 +18,7 @@
         <scala.version>${scala.major-version}.8</scala.version>
         <alchim31.scala.plugin>4.0.1</alchim31.scala.plugin>
         <junit-jupiter.version>5.4.0</junit-jupiter.version>
+        <rsocket.version>0.12.1</rsocket.version>
         <rsocket-rpc.version>0.2.16</rsocket-rpc.version>
     </properties>
 
@@ -81,14 +82,31 @@
             <version>1.2.3</version>
         </dependency>
         <dependency>
-            <groupId>io.rsocket.rpc</groupId>
-            <artifactId>rsocket-rpc-core</artifactId>
-            <version>${rsocket-rpc.version}</version>
+            <groupId>io.rsocket</groupId>
+            <artifactId>rsocket-core</artifactId>
+            <version>${rsocket.version}</version>
         </dependency>
         <dependency>
             <groupId>io.rsocket</groupId>
             <artifactId>rsocket-transport-netty</artifactId>
-            <version>0.12.1</version>
+            <version>${rsocket.version}</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>io.opentracing</groupId>
+            <artifactId>opentracing-api</artifactId>
+            <version>0.32.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+            <version>1.1.3</version>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>io.rsocket.rpc</groupId>
+            <artifactId>rsocket-rpc-core</artifactId>
+            <version>${rsocket-rpc.version}</version>
         </dependency>
     </dependencies>
     <build>
