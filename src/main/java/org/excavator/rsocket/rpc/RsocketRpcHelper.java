@@ -57,4 +57,8 @@ public class RsocketRpcHelper {
                 .map(s -> SimpleRequest.newBuilder().setRequestMessage(s).build());
     }
 
+    public static SimpleRequest buildRequest(){
+        return SimpleRequest.newBuilder().setRequestMessage("simpleRequest").build();
+    }
+
 }
