@@ -1,10 +1,9 @@
 package org.excavator.rsocket.rpc
 
-import io.rsocket.{RSocket, RSocketFactory}
+import io.rsocket.RSocketFactory
 import io.rsocket.transport.netty.client.TcpClientTransport
-import org.excavator.grpc.rsocket.rpc.{SimpleRequest, SimpleServiceClient}
+import org.excavator.grpc.rsocket.rpc.SimpleServiceClient}
 import org.slf4j.LoggerFactory
-import reactor.core.publisher.Flux
 
 class RsocketRpcClientApplication {
 
@@ -12,6 +11,7 @@ class RsocketRpcClientApplication {
 
   var serviceClient: SimpleServiceClient = null
   val requests = RsocketRpcHelper.buildRequests()
+  val simpleRequest = RsocketRpcHelper.buildRequest()
 
   def connect(port: Int) = {
     val rSocket = RSocketFactory.connect()
@@ -22,14 +22,14 @@ class RsocketRpcClientApplication {
   }
 
   def streamingRequestSingleResponse() = {
-
-    val response = serviceClient.streamingRequestSingleResponse(requests, io.netty.buffer.Unpooled.EMPTY_BUFFER)
-
-    response
+    serviceClient.streamingRequestSingleResponse(requests, io.netty.buffer.Unpooled.EMPTY_BUFFER)
   }
 
   def streamingRequestAndResponse() = {
-    val responseFlux = serviceClient.streamingRequestAndResponse(requests, io.netty.buffer.Unpooled.EMPTY_BUFFER)
-    responseFlux
+    serviceClient.streamingRequestAndResponse(requests, io.netty.buffer.Unpooled.EMPTY_BUFFER)
+  }
+
+  def requestStream() = {
+    serviceClient.requestStream(simpleRequest)
   }
 }
