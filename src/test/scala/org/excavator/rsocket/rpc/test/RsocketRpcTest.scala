@@ -11,19 +11,24 @@ class RsocketRpcTest {
   @DisplayName("testRsocketRpc")
   @RepeatedTest(1000)
   def testRsocketRpc() = {
-    val server = new RsocketRpcServerApplication
-    server.start(53000)
-    val client = new RsocketRpcClientApplication()
-    client.connect(53000)
+    val response = RsocketRpcTest.client.streamingRequestSingleResponse()
+    logger.info(s"response = ${response}")
   }
 }
 
 object RsocketRpcTest {
 
+  val port = 53000
+
+  var client:RsocketRpcClientApplication = null
+
   @BeforeAll
   def initServer() = {
-    val host = "localhost"
-    val port = 53000
+    val server = new RsocketRpcServerApplication
+    server.start(port)
+
+    client = new RsocketRpcClientApplication
+    client.connect(port)
   }
 
 }
