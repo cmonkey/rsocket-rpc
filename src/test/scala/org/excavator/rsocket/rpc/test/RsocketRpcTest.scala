@@ -8,9 +8,9 @@ class RsocketRpcTest {
   val logger = LoggerFactory.getLogger(classOf[RsocketRpcTest])
 
   @Test
-  @DisplayName("testRsocketRpc")
+  @DisplayName("testStreamingRequestSingleResponse")
   @RepeatedTest(1000)
-  def testRsocketRpc() = {
+  def testStreamingRequestSingleResponse() = {
     val response = RsocketRpcTest.client.streamingRequestSingleResponse()
     logger.info(s"response = ${response}")
   }
