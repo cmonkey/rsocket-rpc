@@ -51,4 +51,10 @@ public class RsocketRpcHelper {
                 .map(s -> SimpleResponse.newBuilder().setResponseMessage(s).build());
     }
 
+    public static Flux<SimpleRequest> buildRequests(){
+        return Flux.range(1, 11)
+                .map(i -> "sending -> " + i)
+                .map(s -> SimpleRequest.newBuilder().setRequestMessage(s).build());
+    }
+
 }
