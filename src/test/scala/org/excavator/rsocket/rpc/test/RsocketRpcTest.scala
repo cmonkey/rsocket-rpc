@@ -41,6 +41,14 @@ class RsocketRpcTest {
 
     responseMono.subscribe(e => logger.info(s"response = ${e}"))
   }
+
+  @Test
+  @DisplayName("testRequestReply")
+  @RepeatedTest(10)
+  def testRequestReply() = {
+    val responseMono = RsocketRpcTest.client.requestReply()
+    responseMono.subscribe(response => logger.info(s"response = ${response}"))
+  }
 }
 
 object RsocketRpcTest {
