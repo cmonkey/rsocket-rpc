@@ -16,10 +16,17 @@
         <grpc.version>1.19.0</grpc.version>
         <scala.major-version>2.12</scala.major-version>
         <scala.version>${scala.major-version}.8</scala.version>
-        <alchim31.scala.plugin>4.0.1</alchim31.scala.plugin>
         <junit-jupiter.version>5.4.0</junit-jupiter.version>
         <rsocket.version>0.12.1</rsocket.version>
         <rsocket-rpc.version>0.2.16</rsocket-rpc.version>
+
+        <!-- plugin start -->
+        <maven.compiler.plugin>3.8.0</maven.compiler.plugin>
+        <maven.source.plugin>3.0.1</maven.source.plugin>
+		<alchim31.scala.plugin>4.0.1</alchim31.scala.plugin>
+        <maven.surefire.plugin>2.22.1</maven.surefire.plugin>
+        <!-- plugin end -->
+
     </properties>
 
     <dependencies>
@@ -180,6 +187,42 @@
                         <jvmArg>-Xms64m</jvmArg>
                         <jvmArg>-Xmx1024m</jvmArg>
                     </jvmArgs>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin}</version>
+                <configuration>
+                    <encoding>${project.encoding}</encoding>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.plugin}</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skipSource>true</skipSource>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.plugin}</version>
+                <configuration>
+                    <reuseForks>false</reuseForks>
                 </configuration>
             </plugin>
         </plugins>
