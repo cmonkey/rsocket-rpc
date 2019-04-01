@@ -32,4 +32,8 @@ class RsocketRpcClientApplication {
   def requestStream() = {
     serviceClient.requestStream(simpleRequest)
   }
+
+  def fireAndForget() = {
+    serviceClient.fireAndForget(simpleRequest)
+  }
 }
