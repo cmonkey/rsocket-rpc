@@ -32,6 +32,15 @@ class RsocketRpcTest {
     val responseFlux = RsocketRpcTest.client.requestStream()
     responseFlux.subscribe((simpleResponse) => {logger.info(s"response = ${simpleResponse}")})
   }
+
+  @Test
+  @DisplayName("testFireAndForget")
+  @RepeatedTest(10)
+  def testFireAndForget() = {
+    val responseMono = RsocketRpcTest.client.fireAndForget()
+
+    responseMono.subscribe(e => logger.info(s"response = ${e}"))
+  }
 }
 
 object RsocketRpcTest {
