@@ -85,6 +85,11 @@
             <artifactId>rsocket-rpc-core</artifactId>
             <version>${rsocket-rpc.version}</version>
         </dependency>
+        <dependency>
+            <groupId>io.rsocket</groupId>
+            <artifactId>rsocket-transport-netty</artifactId>
+            <version>0.12.1</version>
+        </dependency>
     </dependencies>
     <build>
         <extensions>
