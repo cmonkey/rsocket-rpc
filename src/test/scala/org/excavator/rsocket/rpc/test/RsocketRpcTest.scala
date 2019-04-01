@@ -2,9 +2,10 @@ package org.excavator.rsocket.rpc.test
 
 import org.excavator.rsocket.rpc.{RsocketRpcClientApplication, RsocketRpcServerApplication}
 import org.junit.jupiter.api._
+import org.junit.jupiter.api.Assertions._
 import org.slf4j.LoggerFactory
 
-class RsocketRpcTest {
+class RsocketRpcTest{
   val logger = LoggerFactory.getLogger(classOf[RsocketRpcTest])
 
   @Test
@@ -15,6 +16,8 @@ class RsocketRpcTest {
     responseMono.subscribe(simpleResponse => {
       logger.info(s"response = ${simpleResponse.getResponseMessage}")
     })
+
+    assertNotNull(responseMono)
   }
 
   @Test
@@ -23,6 +26,7 @@ class RsocketRpcTest {
   def testStreamingRequestAndResponse() = {
     val responseFlux = RsocketRpcTest.client.streamingRequestAndResponse()
     responseFlux.subscribe((simpleResponse) => {logger.info(s"response = ${simpleResponse}")})
+    assertNotNull(responseFlux)
   }
 
   @Test
@@ -31,6 +35,7 @@ class RsocketRpcTest {
   def testRequestStream() = {
     val responseFlux = RsocketRpcTest.client.requestStream()
     responseFlux.subscribe((simpleResponse) => {logger.info(s"response = ${simpleResponse}")})
+    assertNotNull(responseFlux)
   }
 
   @Test
@@ -40,6 +45,8 @@ class RsocketRpcTest {
     val responseMono = RsocketRpcTest.client.fireAndForget()
 
     responseMono.subscribe(e => logger.info(s"response = ${e}"))
+
+    assertNotNull(responseMono)
   }
 
   @Test
@@ -48,6 +55,7 @@ class RsocketRpcTest {
   def testRequestReply() = {
     val responseMono = RsocketRpcTest.client.requestReply()
     responseMono.subscribe(response => logger.info(s"response = ${response}"))
+    assertNotNull(responseMono)
   }
 }
 
