@@ -41,4 +41,14 @@ public class RsocketRpcHelper {
                     return SimpleResponse.newBuilder().setResponseMessage(s).build();
         });
     }
+
+    public static Flux<SimpleResponse> requestStream(SimpleRequest message, ByteBuf metadata) {
+        String requestMessage = message.getRequestMessage();
+
+        return Flux.interval(Duration.ofMillis(200))
+                .onBackpressureDrop()
+                .map(i -> i + " - got message -" + requestMessage)
+                .map(s -> SimpleResponse.newBuilder().setResponseMessage(s).build());
+    }
+
 }
