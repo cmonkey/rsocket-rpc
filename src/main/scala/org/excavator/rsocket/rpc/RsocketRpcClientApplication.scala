@@ -10,23 +10,26 @@ class RsocketRpcClientApplication {
 
   val logger = LoggerFactory.getLogger(classOf[RsocketRpcClientApplication])
 
-  var rSocket: RSocket = null
+  var serviceClient: SimpleServiceClient = null
+  val requests = RsocketRpcHelper.buildRequests()
 
   def connect(port: Int) = {
-    rSocket = RSocketFactory.connect()
+    val rSocket = RSocketFactory.connect()
       .transport(TcpClientTransport.create(port))
       .start()
       .block()
+    serviceClient = new SimpleServiceClient(rSocket)
   }
 
   def streamingRequestSingleResponse() = {
 
-    val serviceClient = new SimpleServiceClient(rSocket)
-
-    val requests:Flux[SimpleRequest] = RsocketRpcHelper.buildRequests()
-
-    val response = serviceClient.streamingRequestSingleResponse(requests, io.netty.buffer.Unpooled.EMPTY_BUFFER).block
+    val response = serviceClient.streamingRequestSingleResponse(requests, io.netty.buffer.Unpooled.EMPTY_BUFFER)
 
     response
+  }
+
+  def streamingRequestAndResponse() = {
+    val responseFlux = serviceClient.streamingRequestAndResponse(requests, io.netty.buffer.Unpooled.EMPTY_BUFFER)
+    responseFlux
   }
 }
