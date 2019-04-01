@@ -2,7 +2,7 @@ package org.excavator.rsocket.rpc
 
 import io.rsocket.RSocketFactory
 import io.rsocket.transport.netty.client.TcpClientTransport
-import org.excavator.grpc.rsocket.rpc.SimpleServiceClient}
+import org.excavator.grpc.rsocket.rpc.SimpleServiceClient
 import org.slf4j.LoggerFactory
 
 class RsocketRpcClientApplication {
@@ -35,5 +35,9 @@ class RsocketRpcClientApplication {
 
   def fireAndForget() = {
     serviceClient.fireAndForget(simpleRequest)
+  }
+
+  def requestReply() = {
+    serviceClient.requestReply(simpleRequest)
   }
 }
