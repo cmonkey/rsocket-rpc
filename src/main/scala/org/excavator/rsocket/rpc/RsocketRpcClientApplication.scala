@@ -6,7 +6,7 @@ import org.excavator.grpc.rsocket.rpc.{SimpleRequest, SimpleServiceClient}
 import org.slf4j.LoggerFactory
 import reactor.core.publisher.Flux
 
-class RsocketRpcClientApplication(host: String, port: Int) {
+class RsocketRpcClientApplication {
 
   val logger = LoggerFactory.getLogger(classOf[RsocketRpcClientApplication])
 
@@ -18,12 +18,7 @@ class RsocketRpcClientApplication(host: String, port: Int) {
 
     val serviceClient = new SimpleServiceClient(rSocket)
 
-    val requests:Flux[SimpleRequest] = Flux.range(1, 11)
-      .map(i => "sending -> " + i)
-      .map(s => {
-        logger.info(s"s = ${s}")
-        SimpleRequest.newBuilder().setRequestMessage(s.getRequestMessage).build()
-      })
+    val requests:Flux[SimpleRequest] = RsocketRpcHelper.buildRequests()
 
     val response = serviceClient.streamingRequestSingleResponse(requests, io.netty.buffer.Unpooled.EMPTY_BUFFER).block
 
