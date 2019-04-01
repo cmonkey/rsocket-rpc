@@ -22,8 +22,5 @@ class RsocketRpcServerApplication {
       .start()
       .log("start")
       .block()
-      .onClose()
-      .log("onClose")
-      .block()
   }
 }
