@@ -40,14 +40,7 @@ class DefaultSimpleService extends SimpleService{
     * </pre>
     */
   override def requestStream(message: SimpleRequest, metadata: ByteBuf): Flux[SimpleResponse] = {
-    val requestMessage = message.getRequestMessage
-    Flux.interval(Duration.ofMillis(200))
-      .onBackpressureDrop()
-      .map(i => i + " - got message - " + requestMessage)
-      .map(s => {
-        logger.info(s"s = ${s}")
-        SimpleResponse.newBuilder().setResponseMessage(s.getResponseMessage).build()
-      })
+    RsocketRpcHelper.requestStream(message, metadata)
   }
 
   /**
@@ -56,7 +49,7 @@ class DefaultSimpleService extends SimpleService{
     * </pre>
     */
   override def streamingRequestSingleResponse(messages: Publisher[SimpleRequest], metadata: ByteBuf): Mono[SimpleResponse] = {
-    RsocketRpcHelper.streamingRequestSingleResponse(messages, metadata())
+    RsocketRpcHelper.streamingRequestSingleResponse(messages, metadata)
   }
 
   /**
