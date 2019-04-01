@@ -9,10 +9,20 @@ class RsocketRpcTest {
 
   @Test
   @DisplayName("testStreamingRequestSingleResponse")
-  @RepeatedTest(1000)
+  @RepeatedTest(10)
   def testStreamingRequestSingleResponse() = {
-    val response = RsocketRpcTest.client.streamingRequestSingleResponse()
-    logger.info(s"response = ${response}")
+    val responseMono = RsocketRpcTest.client.streamingRequestSingleResponse()
+    responseMono.subscribe(simpleResponse => {
+      logger.info(s"response = ${simpleResponse.getResponseMessage}")
+    })
+  }
+
+  @Test
+  @DisplayName("testStreamingRequestAndResponse")
+  @RepeatedTest(10)
+  def testStreamingRequestAndResponse() = {
+    val responseFlux = RsocketRpcTest.client.streamingRequestAndResponse()
+    responseFlux.subscribe((simpleResponse) => {logger.info(s"response = ${simpleResponse}")})
   }
 }
 
